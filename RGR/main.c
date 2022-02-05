@@ -1,3 +1,4 @@
+
 #include "header.h"
 
 int main ()
@@ -26,10 +27,10 @@ int main ()
 					GPIO_MODER_MODE5_1 | GPIO_MODER_MODE6_1 |
 					GPIO_MODER_MODE7_1);
 					
-	GPIOD->MODER |= GPIO_MODER_MODE12_0 | GPIO_MODER_MODE14_0 | 
+	GPIOD->MODER |= GPIO_MODER_MODE13_0 | GPIO_MODER_MODE14_0 | 
 					GPIO_MODER_MODE15_0;
 	GPIOD->MODER &= ~ (GPIO_MODER_MODE15_1 | GPIO_MODER_MODE14_1 | 
-					  GPIO_MODER_MODE12_1);
+					  GPIO_MODER_MODE13_1);
 
 	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOAEN; // увімкнення тактування порту GPIOА
 	
@@ -55,15 +56,15 @@ int main ()
 	
 	while(1) //нескінченний цикл обробки чисел
 	{
-		GPIOD->ODR &= ~GPIO_ODR_OD12; 
+		GPIOD->ODR &= ~GPIO_ODR_OD13; 
 		GPIOD->ODR &= ~GPIO_ODR_OD14;    // налаштування світлодіодів на вихід 
 		GPIOD->ODR &= ~GPIO_ODR_OD15;
 		
 		while (GPIOA->IDR & GPIO_IDR_ID15) // вводимо значення першого операнду - перше число
 		
 		{
-			if (min_num1 == 1) GPIOD->ODR |= GPIO_ODR_OD12; // індикація від'ємного числа
-			else GPIOD->ODR &= ~GPIO_ODR_OD12;
+			if (min_num1 == 1) GPIOD->ODR |= GPIO_ODR_OD13; // індикація від'ємного числа
+			else GPIOD->ODR &= ~GPIO_ODR_OD13;
 			display(num1);
 			if (!(GPIOC->IDR & GPIO_IDR_ID6)) 
 			{
@@ -100,8 +101,8 @@ int main ()
 		
 		while (GPIOA->IDR & GPIO_IDR_ID0)  //введення значення другого операнду - другого числа
 		{		
-			if (min_num2 == 1) GPIOD->ODR |= GPIO_ODR_OD12; //індикація від'ємнго числа
-			else GPIOD->ODR &= ~GPIO_ODR_OD12;
+			if (min_num2 == 1) GPIOD->ODR |= GPIO_ODR_OD13; //індикація від'ємнго числа
+			else GPIOD->ODR &= ~GPIO_ODR_OD13;
 			display(num2);
 			GPIOD->ODR &= ~GPIO_ODR_OD14;
 			if (!(GPIOC->IDR & GPIO_IDR_ID6)) 

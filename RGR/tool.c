@@ -176,8 +176,8 @@ int8_t sum(int8_t num1, int8_t num2, int8_t min_num1, int8_t min_num2)
 		}
 		
 		GPIOD->ODR |= GPIO_ODR_OD15; //індикація результату
-		if (min_res == 1) GPIOD->ODR |= GPIO_ODR_OD12;  //індикація від'ємного числа
-		else GPIOD->ODR &= ~GPIO_ODR_OD12;
+		if (min_res == 1) GPIOD->ODR |= GPIO_ODR_OD13;  //індикація від'ємного числа
+		else GPIOD->ODR &= ~GPIO_ODR_OD13;
 		
 		if(res > 0x99) GPIOD->ODR |= GPIO_ODR_OD14; //індикація переповнення розряду
 		return res;
